@@ -1,0 +1,137 @@
+﻿@{
+    ViewBag.Title = "Редактирование пользователя";
+}
+
+
+
+    <div class="jumbotron">
+        <h1>@ViewBag.Caption пользователя</h1>
+
+        <i><font color="red">@ViewBag.Message</font></i><br />
+
+
+        <form method="post" action="">
+
+            <input type="hidden" name="Id" value="@ViewBag.User0.Id" />
+
+
+
+
+            <div class="row">
+                <div class="col-md-4">
+                    <label>ФИО</label><sup><font color="red">*</font></sup><br />
+                    <input type="text" name="User_fio" value="@ViewBag.User0.User_fio" />
+                </div>
+
+                <div class="col-md-4">
+                    <label>Адрес</label><sup><font color="red">*</font></sup><br />
+                    <input type="text" name="User_address" value="@ViewBag.User0.User_address" />
+                </div>
+
+            </div>
+
+
+
+            <br />
+
+
+
+            <div class="row">
+                <div class="col-md-4">
+                    <label>E-mail</label><br />
+                    <input type="text" name="User_email" value="@ViewBag.User0.User_email" />
+                </div>
+
+                <div class="col-md-4">
+                    <label>Телефон</label><sup><font color="red">*</font></sup><br />
+                    <input type="text" name="User_tel" value="@ViewBag.User0.User_tel" />
+                </div>
+
+            </div>
+
+
+            <br />
+
+            <div class="row">
+                <div class="col-md-4">
+                    <label>Логин</label><sup><font color="red">*</font></sup><br />
+                    <input type="text" name="User_log" value="@ViewBag.User0.User_log" />
+                </div>
+
+                <div class="col-md-4">
+                    <label>Пароль</label><sup><font color="red">*</font></sup><br />
+                    <input type="text" name="User_pas" value="@ViewBag.User0.User_pas" />
+                </div>
+
+            </div>
+
+
+            <br />
+
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <label>Паспорт</label><sup><font color="red">*</font></sup><br />
+                    <input type="text" name="User_pasport" value="@ViewBag.User0.User_pasport" />
+                </div>
+
+
+                <div class="col-md-4">
+
+                    <!-- Выпадающий список прав пользователя -->
+
+                    <label>Право</label><sup><font color="red">*</font></sup><br />
+
+                    <select name="Law_Id">
+
+                        <option value="0">Выберите право</option>
+
+                        @foreach (var item in ViewBag.Laws)
+                        {
+                            if (item.Id == ViewBag.User0.User_Law_Id)
+                            {
+                                <option value="@item.Id.ToString()" selected>@item.Law_name.ToString()</option>
+                            }
+                            else
+                            {
+                                <option value="@item.Id.ToString()">@item.Law_name.ToString()</option>
+                            }
+                        }
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <br />
+
+
+
+
+
+
+
+            <br />
+
+            <!-- Кнопка примерить (Добавить/Изменить) -->
+            <input class="btn btn-primary btn-lg" type="submit" name="@ViewBag.Mode" value="@ViewBag.Caption" />
+
+
+            <!-- Кнопка удаления -->
+            @if (ViewBag.USER != null && ViewBag.USER.User_Law_Id == 1 && ViewBag.Mode == "update")
+            {
+                <input class="btn btn-primary btn-lg" type="submit" name="delete" value="Удалить" />
+            }
+
+            <!-- Кнопка отмены -->
+            @if (ViewBag.USER != null && ViewBag.USER.User_Law_Id == 1)
+            {
+                <input class="btn btn-primary btn-lg" type="submit" name="cancel" value="Отменить" />
+            }
+
+
+        </form>
+
+    </div>

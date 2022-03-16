@@ -1,0 +1,233 @@
+﻿@{
+    ViewBag.Title = "Каталог компьютерной техники";
+}
+
+
+
+
+<div class="jumbotron">
+    <h1>Каталог компьютерной техники</h1>
+
+
+    <div class="row">
+
+        <!-- ================== Колонка фильтра ================== -->
+        <!-- ===================================================== -->
+        <div class="col-md-3">
+
+            <form method="post">
+
+
+
+                <!-- Выпадающий список категорий компьютерной техники -->
+
+                <label>Категория:</label><br />
+
+                <select name="Category_Id">
+
+                    <option value="0">Показать все</option>
+
+                    @foreach (var item in ViewBag.Categories)
+                    {
+                        if (item.Id == ViewBag.Category_Id)
+                        {
+                            <option value="@item.Id.ToString()" selected>@item.Category_name.ToString()</option>
+                        }
+                        else
+                        {
+                            <option value="@item.Id.ToString()">@item.Category_name.ToString()</option>
+                        }
+                    }
+                </select><br />
+
+
+
+                <!-- Поле поиска по названию -->
+
+                <label>Название:</label><br />
+
+                <input type="text" name="Technic_name" value="@ViewBag.Technic_name" /><br />
+
+
+
+                <!-- Поле поиска по модели -->
+
+                <label>Модель:</label><br />
+
+                <input type="text" name="Technic_model" value="@ViewBag.Technic_model" /><br />
+
+
+
+                <!-- Поле поиска по параметрам -->
+
+                <label>Параметры:</label><br />
+
+                <input type="text" name="Technic_param" value="@ViewBag.Technic_param" /><br />
+
+
+
+                <!-- Выпадающий список года выпуска компьютерной техники -->
+
+                <label>Год выпуска:</label><br />
+
+                <select name="Technic_year">
+
+                    <option value="0">Показать все</option>
+
+                    @for (int i = 2020; i >= 1980; i--)
+                    {
+                        if (i == ViewBag.Technic_year)
+                        {
+                            <option value="@i.ToString()" selected>@i.ToString()</option>
+                        }
+                        else
+                        {
+                            <option value="@i.ToString()">@i.ToString()</option>
+                        }
+                    }
+                </select><br />
+
+
+
+
+                <!-- Кнопка отбора -->
+
+                <br />
+                <input class="btn btn-primary btn-lg" type="submit" name="select" value="Отобрать" />
+            </form>
+
+
+
+
+            <!-- Кнопка Добавление (Администратор) -->
+
+            @if (ViewBag.USER != null && ViewBag.USER.User_Law_Id == 1)
+            {
+                if (ViewBag.Category_Id != null && ViewBag.Category_Id > 0)
+                {
+                    <br />
+                    <form method="post" action="/Home/EditCatalog">
+                        <input type="hidden" name="Category_Id" value="@ViewBag.Category_Id" />
+                        <input class="btn btn-primary btn-lg" type="submit" name="add" value="Добавить" />                        
+                    </form>
+                }
+                else
+                {
+                    <br /><i> Для добавления компьютерной техники - выберите категорию и нажмите кнопку Отобрать</i>
+                }
+            }
+
+
+
+        </div>
+
+
+
+        <!-- ================== Колонка данных =================== -->
+        <!-- ===================================================== -->
+
+        <div class="col-md-1">
+
+
+            <!-- Список компьютерной техники -->
+
+            <table border="1">
+
+
+
+
+                <!-- Шапка таблицы -->
+                <tr>
+                    @if (ViewBag.Category_Id == null || ViewBag.Category_Id == 0)
+                    {
+                        <th>Категория</th>
+                    }
+                    <th>Производитель</th>
+                    <th>Название</th>
+                    <th>Модель</th>
+                    <th>Параметры</th>
+                    <th>Цена</th>
+                    <th>На складе</th>
+
+                    <!-- Колонка (Администратор) -->
+                    @if (ViewBag.USER != null && ViewBag.USER.User_Law_Id == 1)
+                    {
+                        <th>Управление</th>
+                    }
+
+                    <!-- Колонка (Клиент) -->
+                    @if (ViewBag.USER != null && ViewBag.USER.User_Law_Id == 2)
+                    {
+                        <th></th>
+                    }
+                </tr>
+
+
+
+
+                <!-- Данные таблицы -->
+
+                @foreach (var item in ViewBag.Technics)
+                {
+            <tr>
+
+                @if (ViewBag.Category_Id == null || ViewBag.Category_Id == 0)
+                {
+                    <td>@item.Categories.Category_name.ToString()</td>
+                }
+
+                <td>@item.Brands.Brand_name.ToString(), @item.Countries.Country_name.ToString()</td>
+                <td>@item.Technic_name.ToString(), @item.Technic_year.ToString()</td>
+                <td>@item.Technic_model.ToString()</td>
+                <td>@item.Technic_param.ToString()</td>
+                <td>@item.Technic_cost.ToString()</td>
+
+                @if (item.Technic_availability == 1)
+                {
+                    <td>в наличии</td>
+                }
+                else
+                {
+                    <td>под заказ</td>
+                }
+
+
+
+                <!-- Кнопка Изменение (Администратор) -->
+                @if (ViewBag.USER != null && ViewBag.USER.User_Law_Id == 1)
+                {
+                    <td>
+                        <form method="post" action="/Home/EditCatalog">
+                            <input type="hidden" name="Id" value="@item.Id" />
+                            <input class="btn btn-primary btn-lg" type="submit" name="edit" value="Изменить" />
+                        </form>
+                    </td>
+                }
+
+
+
+                <!-- Кнопка В корзину (Клиент) -->
+                @if (ViewBag.USER != null && ViewBag.USER.User_Law_Id == 2)
+                {
+                    <td>
+                        <form method="post" action="/Home/Catalog">
+                            <input type="hidden" name="Id" value="@item.Id" />
+                            <input class="btn btn-primary btn-lg" type="submit" name="bag" value="В корзину" />
+                        </form>
+                    </td>
+                }
+
+
+
+            </tr>
+                }
+
+            </table>
+            
+            <!-- ===================================================== -->
+
+
+        </div>
+    </div>
+
+</div>

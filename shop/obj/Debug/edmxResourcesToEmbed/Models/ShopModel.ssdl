@@ -1,0 +1,287 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище bazaModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Brands">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Brand_name" Type="nchar" MaxLength="18" Nullable="false" />
+    <Property Name="Mark_del" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Category_name" Type="nchar" MaxLength="25" Nullable="false" />
+    <Property Name="Mark_del" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Countries">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Country_name" Type="nchar" MaxLength="15" Nullable="false" />
+    <Property Name="Mark_del" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Laws">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Law_name" Type="nchar" MaxLength="18" Nullable="false" />
+    <Property Name="Mark_del" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Methods">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Method_name" Type="nchar" MaxLength="18" Nullable="false" />
+    <Property Name="Mark_del" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Order_User_Id" Type="int" Nullable="false" />
+    <Property Name="Order_Way_Id" Type="int" Nullable="false" />
+    <Property Name="Order_State_Id" Type="int" Nullable="false" />
+    <Property Name="Order_Method_Id" Type="int" Nullable="false" />
+    <Property Name="Order_date" Type="datetime" Nullable="false" />
+    <Property Name="Order_delivery" Type="datetime" Nullable="false" />
+    <Property Name="Order_paid" Type="int" Nullable="false" />
+    <Property Name="Mark_del" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Records">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Record_Technic_Id" Type="int" Nullable="false" />
+    <Property Name="Record_Order_Id" Type="int" Nullable="false" />
+    <Property Name="Record_count" Type="int" Nullable="false" />
+    <Property Name="Mark_del" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="States">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="State_name" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="Mark_del" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Technics">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Technic_Country_Id" Type="int" Nullable="false" />
+    <Property Name="Technic_Category_Id" Type="int" Nullable="false" />
+    <Property Name="Technic_Brand_Id" Type="int" Nullable="false" />
+    <Property Name="Technic_name" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="Technic_model" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="Technic_param" Type="nchar" MaxLength="50" />
+    <Property Name="Technic_year" Type="int" Nullable="false" />
+    <Property Name="Technic_cost" Type="float" Nullable="false" />
+    <Property Name="Technic_availability" Type="int" Nullable="false" />
+    <Property Name="Mark_del" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="User_Law_Id" Type="int" Nullable="false" />
+    <Property Name="User_fio" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="User_address" Type="nchar" MaxLength="70" Nullable="false" />
+    <Property Name="User_pasport" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="User_email" Type="nchar" MaxLength="30" />
+    <Property Name="User_tel" Type="nchar" MaxLength="13" Nullable="false" />
+    <Property Name="User_log" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="User_pas" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="Mark_del" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ways">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ways_name" Type="nchar" MaxLength="30" Nullable="false" />
+    <Property Name="Mark_del" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Orders_To_Methods">
+    <End Role="Methods" Type="Self.Methods" Multiplicity="1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Methods">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="Order_Method_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_To_States">
+    <End Role="States" Type="Self.States" Multiplicity="1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="States">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="Order_State_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_To_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="Order_User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_To_Ways">
+    <End Role="Ways" Type="Self.Ways" Multiplicity="1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ways">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="Order_Way_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Records_To_Orders">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+    <End Role="Records" Type="Self.Records" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Records">
+        <PropertyRef Name="Record_Order_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Records_To_Technics">
+    <End Role="Technics" Type="Self.Technics" Multiplicity="1" />
+    <End Role="Records" Type="Self.Records" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Technics">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Records">
+        <PropertyRef Name="Record_Technic_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Technics_To_Brands">
+    <End Role="Brands" Type="Self.Brands" Multiplicity="1" />
+    <End Role="Technics" Type="Self.Technics" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Brands">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Technics">
+        <PropertyRef Name="Technic_Brand_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Technics_To_Categories">
+    <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+    <End Role="Technics" Type="Self.Technics" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Technics">
+        <PropertyRef Name="Technic_Category_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Technics_To_Countries">
+    <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
+    <End Role="Technics" Type="Self.Technics" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Countries">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Technics">
+        <PropertyRef Name="Technic_Country_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_To_Laws">
+    <End Role="Laws" Type="Self.Laws" Multiplicity="1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Laws">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="User_Law_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище bazaModelContainer">
+    <EntitySet Name="Brands" EntityType="Self.Brands" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Laws" EntityType="Self.Laws" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Methods" EntityType="Self.Methods" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Records" EntityType="Self.Records" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Technics" EntityType="Self.Technics" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ways" EntityType="Self.Ways" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Orders_To_Methods" Association="Self.FK_Orders_To_Methods">
+      <End Role="Methods" EntitySet="Methods" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_To_States" Association="Self.FK_Orders_To_States">
+      <End Role="States" EntitySet="States" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_To_Users" Association="Self.FK_Orders_To_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_To_Ways" Association="Self.FK_Orders_To_Ways">
+      <End Role="Ways" EntitySet="Ways" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Records_To_Orders" Association="Self.FK_Records_To_Orders">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="Records" EntitySet="Records" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Records_To_Technics" Association="Self.FK_Records_To_Technics">
+      <End Role="Technics" EntitySet="Technics" />
+      <End Role="Records" EntitySet="Records" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Technics_To_Brands" Association="Self.FK_Technics_To_Brands">
+      <End Role="Brands" EntitySet="Brands" />
+      <End Role="Technics" EntitySet="Technics" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Technics_To_Categories" Association="Self.FK_Technics_To_Categories">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Technics" EntitySet="Technics" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Technics_To_Countries" Association="Self.FK_Technics_To_Countries">
+      <End Role="Countries" EntitySet="Countries" />
+      <End Role="Technics" EntitySet="Technics" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_To_Laws" Association="Self.FK_Users_To_Laws">
+      <End Role="Laws" EntitySet="Laws" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

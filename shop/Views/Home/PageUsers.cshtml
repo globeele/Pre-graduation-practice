@@ -1,0 +1,210 @@
+﻿@{
+    ViewBag.Title = "Справочник пользователей";
+}
+
+
+
+
+
+<div class="jumbotron">
+    <h1>Справочник пользователей</h1>
+
+
+    <div class="row">
+
+        <!-- ================== Колонка фильтра ================== -->
+        <!-- ===================================================== -->
+        <div class="col-md-3">
+
+            <form method="post">
+
+
+
+                <!-- Выпадающий список прав -->
+
+                <label>Права (должность):</label><br />
+
+                <select name="Law_Id">
+
+                    <option value="0">Показать все</option>
+
+                    @foreach (var item in ViewBag.Laws)
+                    {
+                        if (item.Id == ViewBag.Law_Id)
+                        {
+                            <option value="@item.Id.ToString()" selected>@item.Law_name.ToString()</option>
+                        }
+                        else
+                        {
+                            <option value="@item.Id.ToString()">@item.Law_name.ToString()</option>
+                        }
+                    }
+                </select><br />
+
+
+
+                <!-- Поле поиска по ФИО -->
+
+                <label>ФИО:</label><br />
+
+                <input type="text" name="User_fio" value="@ViewBag.User_fio" /><br />
+
+
+
+                <!-- Поле поиска по email -->
+
+                <label>E-mail:</label><br />
+
+                <input type="text" name="User_email" value="@ViewBag.User_email" /><br />
+
+
+
+                <!-- Поле поиска по логину  -->
+
+                <label>Логин:</label><br />
+
+                <input type="text" name="User_log" value="@ViewBag.User_log" /><br />
+
+                <!-- Поле поиска по телефону  -->
+
+                <label>Телефон:</label><br />
+
+                <input type="text" name="User_tel" value="@ViewBag.User_tel" /><br />
+
+                <!-- Поле поиска по адресу  -->
+
+                <label>Адрес:</label><br />
+
+                <input type="text" name="User_address" value="@ViewBag.User_address" /><br />
+
+                <!-- Поле поиска по паспорту  -->
+
+                <label>Паспорт:</label><br />
+
+                <input type="text" name="User_pasport" value="@ViewBag.User_pasport" /><br />
+
+                <!-- Кнопка отбора -->
+
+                <br />
+                <input class="btn btn-primary btn-lg" type="submit" name="select" value="Отобрать" />
+            </form>
+
+
+
+
+            <!-- Кнопка Добавление (Администратор) -->
+
+            @if (ViewBag.USER != null && ViewBag.USER.User_Law_Id == 1)
+            {
+                if (ViewBag.Law_Id != null && ViewBag.Law_Id > 0)
+                {
+                    <br />
+                    <form method="post" action="/Home/EditUser">
+                        <input type="hidden" name="Law_Id" value="@ViewBag.Law_Id" />
+                        <input class="btn btn-primary btn-lg" type="submit" name="add" value="Добавить" />                        
+                    </form>
+                }
+                else
+                {
+                    <br /><i> Для добавления пользователя - выберите право и нажмите кнопку Отобрать</i>
+                }
+            }
+
+
+
+        </div>
+
+
+
+        <!-- ================== Колонка данных =================== -->
+        <!-- ===================================================== -->
+
+        <div class="col-md-1">
+
+
+            <!-- Список компьютерной техники -->
+
+            <table border="1">
+
+
+
+
+                <!-- Шапка таблицы -->
+                <tr>
+                    @if (ViewBag.Law_Id == null || ViewBag.Law_Id == 0)
+                    {
+                        <th>Право</th>
+                    }
+                    <th>ФИО</th>
+                    <th>E-mail</th>
+                    <th>Телефон</th>
+
+                    <th>Логин</th>
+
+
+                    <!-- Колонка (Администратор) -->
+                    @if (ViewBag.USER != null && ViewBag.USER.User_Law_Id == 1)
+                    {
+                        <th>Управление</th>
+                    }
+
+                    <!-- Колонка (Клиент) -->
+                    @if (ViewBag.USER != null && ViewBag.USER.User_Law_Id == 2)
+                    {
+                        <th></th>
+                    }
+                </tr>
+
+
+
+
+                <!-- Данные таблицы -->
+
+                @foreach (var item in ViewBag.Users)
+                {
+            <tr>
+
+                @if (ViewBag.Law_Id == null || ViewBag.Law_Id == 0)
+                {
+                    <td>@item.Laws.Law_name.ToString()</td>
+                }
+
+                <td>@item.User_fio</td>
+                <td>@item.User_email</td>
+                <td>@item.User_tel</td>
+                
+                <td>@item.User_log</td>
+
+
+
+
+
+                <!-- Кнопка Изменение (Администратор) -->
+                @if (ViewBag.USER != null && ViewBag.USER.User_Law_Id == 1)
+                {
+                    <td>
+                        <form method="post" action="/Home/EditUser">
+                            <input type="hidden" name="Id" value="@item.Id" />
+                            <input class="btn btn-primary btn-lg" type="submit" name="edit" value="Изменить" />
+                        </form>
+                    </td>
+                }
+
+
+
+              
+
+
+
+            </tr>
+                }
+
+            </table>
+            
+            <!-- ===================================================== -->
+
+
+        </div>
+    </div>
+
+</div>

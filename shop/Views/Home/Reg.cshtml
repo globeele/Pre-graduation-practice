@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "Регистрация на сайте";
+}
+
+
+
+<div class="jumbotron">
+    <h1>Регистрация на сайте</h1>
+
+    @ViewBag.Message<br />
+
+    <form method="post" action="/Home/Reg">
+
+        <div class="row">
+            <div class="col-md-4">
+                <b>ФИО</b><sup>*</sup><br />
+                <input type="text" name="User_fio" />
+            </div>
+
+            <div class="col-md-4">
+                <b>Адрес</b><sup>*</sup><br />
+                <input type="text" name="User_address" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <b>Паспотные данные</b><sup>*</sup><br />
+                <input type="text" name="User_pasport" />
+            </div>
+            <div class="col-md-4">
+                <b>Телефон</b><sup>*</sup><br />
+                <input type="text" name="User_tel" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <b>Логин</b><sup>*</sup><br />
+                <input type="text" name="User_log" />
+            </div>
+            <div class="col-md-4">
+                <b>Пароль</b><sup>*</sup><br />
+                <input type="text" name="User_pas" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <b>E-mail</b><br />
+                <input type="text" name="User_email" />
+            </div>
+
+            <div class="col-md-4">
+                <br />
+                <input class="btn btn-primary btn-lg" type="submit" value="Зарегистрироваться &raquo;" />
+            </div>
+        </div>
+    </form>
+
+</div>

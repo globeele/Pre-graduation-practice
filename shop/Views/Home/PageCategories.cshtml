@@ -1,0 +1,114 @@
+﻿@{
+    ViewBag.Title = "Решения";
+}
+
+
+
+
+
+<div class="jumbotron">
+    <h1>Решения от SoftCorp</h1>
+
+
+    <div class="row">
+
+        <!-- ================== Колонка фильтра ================== -->
+        <!-- ===================================================== -->
+        <div class="col-md-3">
+
+            <form method="post">
+
+                <!-- Поле поиска по названию -->
+
+
+                <input type="text" name="Category_name" value="@ViewBag.Category_name" /><br />
+
+                <!-- Кнопка отбора -->
+
+                <br />
+                <input class="btn btn-primary btn-lg" type="submit" name="select" value="Отобрать" />
+            </form>
+
+
+
+            <!-- Кнопка Добавление (Администратор) -->
+
+            @if (ViewBag.USER != null && ViewBag.USER.User_Law_Id == 1)
+            {
+                    <br />
+                    <form method="post" action="/Home/EditCategory">
+                        <input class="btn btn-primary btn-lg" type="submit" name="add" value="Добавить" />                        
+                    </form>
+            }
+
+        </div>
+
+
+
+        <!-- ================== Колонка данных =================== -->
+        <!-- ===================================================== -->
+
+        <div class="col-md-1">
+
+
+            <!-- Список категорий -->
+
+            <table border="0" width="100%">
+
+
+                <!-- Шапка таблицы -->
+                <tr>
+
+                    <!-- Колонка (Администратор) -->
+                    @if (ViewBag.USER != null && ViewBag.USER.User_Law_Id == 1)
+                    {
+                        <th>Управление</th>
+                    }
+
+                </tr>
+
+
+
+
+                <!-- Данные таблицы -->
+
+                @foreach (var item in ViewBag.Categories)
+                {
+            <tr style="border-bottom:1px solid black;">
+
+                <td>@item.Category_name.ToString()</td>
+
+                <!-- Кнопка Изменение (Администратор) -->
+                @if (ViewBag.USER != null && ViewBag.USER.User_Law_Id == 1)
+                {
+                    <td>
+                        <form method="post" action="/Home/EditCategory">
+                            <input type="hidden" name="Id" value="@item.Id" />
+                            <input class="btn btn-primary btn-lg" type="submit" name="edit" value="Изменить" />
+                        </form>
+                    </td>
+                }
+
+
+                <!-- Кнопка В корзину (Клиент) -->
+                @if (ViewBag.USER != null && ViewBag.USER.User_Law_Id == 2)
+                {
+                    <td>
+                        <form method="post" action="/Home/PageCategories">
+                            <input type="hidden" name="Id" value="@item.Id" />
+                            <input class="btn btn-primary btn-lg" type="submit" name="bag" value="В корзину" />
+                        </form>
+                    </td>
+                }
+            </tr>
+                }
+
+            </table>
+            
+            <!-- ===================================================== -->
+
+
+        </div>
+    </div>
+
+</div>

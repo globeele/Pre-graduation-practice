@@ -1,0 +1,108 @@
+﻿@{
+    ViewBag.Title = "Состав заказа";
+}
+
+
+
+
+    <div class="jumbotron">
+        <h1>Состав заказа</h1>
+
+
+        <div class="row">
+
+
+
+            <div class="col-md-1">
+
+                @if (ViewBag.Records == null || ViewBag.Records.Count < 1)
+                {
+                    <p>Заказ не сформирован</p>
+                }
+                else
+                {
+                    <!-- Список компьютерной техники -->
+
+                    <table border="1">
+
+
+
+
+                        <!-- Шапка таблицы -->
+                        <tr>
+
+                            <th>Категория</th>
+
+                            <th>Производитель</th>
+                            <th>Название</th>
+                            <th>Модель</th>
+                            <th>Параметры</th>
+                            <th>Цена за единицу, бел.руб.</th>
+                            <th>Количество</th>
+                            <th>Всего, бел.руб.</th>
+                            <th>НДС, бел.руб.</th>
+                            <th>Всего с НДС, бел.руб.</th>
+                            <th>На складе</th>
+
+
+                        </tr>
+
+
+
+                        @{
+                            ViewBag.Sum = 0.0;
+                        }
+
+                        <!-- Данные таблицы -->
+
+                        @foreach (var item in ViewBag.Records)
+                        {
+                            <tr>
+
+
+                                <td>@item.Technics.Categories.Category_name.ToString()</td>
+
+                                <td>@item.Technics.Brands.Brand_name.ToString(), @item.Technics.Countries.Country_name.ToString()</td>
+                                <td>@item.Technics.Technic_name.ToString(), @item.Technics.Technic_year.ToString()</td>
+                                <td>@item.Technics.Technic_model.ToString()</td>
+                                <td>@item.Technics.Technic_param.ToString()</td>
+                                <td>@item.Technics.Technic_cost.ToString()</td>
+                                <td>@item.Record_count.ToString()</td>
+                                <td>@Math.Round(item.Technics.Technic_cost * item.Record_count,2)</td>
+                                <td>@Math.Round(item.Technics.Technic_cost * item.Record_count *20/100,2)</td>
+                                <td><b>@Math.Round(item.Technics.Technic_cost * item.Record_count + item.Technics.Technic_cost * item.Record_count * 20 / 100,2)</b></td>
+
+                                @if (item.Technics.Technic_availability == 1)
+                                {
+                                    <td>в наличии</td>
+                                }
+                                else
+                                {
+                                    <td>под заказ</td>
+                                }
+
+                                @{
+                                    ViewBag.Sum += item.Technics.Technic_cost * item.Record_count;
+                                    ViewBag.Sum += item.Technics.Technic_cost * item.Record_count *20 / 100;
+                                }
+
+                            </tr>
+                        }
+
+                    </table>
+
+
+                }
+                <!-- ===================================================== -->
+
+
+            </div>
+
+
+        </div>
+        <br /><br />
+        @{ 
+            ViewBag.NDS = ViewBag.Sum * 20 / 100;
+        }
+        <p> Итого по заказу: <b>@Math.Round(ViewBag.Sum,2) бел.руб.</b>, в том числе НДС - <i>@Math.Round(ViewBag.NDS,2) бел.руб.</i></p>
+    </div>

@@ -1,0 +1,135 @@
+﻿@{
+    ViewBag.Title = "Мои заявки";
+}
+
+    
+         
+
+
+    <div class="jumbotron">
+
+        <!-- Администрирование -->
+        @if (ViewBag.USER.User_Law_Id == 1)
+        {
+            <h1>Все заявки</h1>
+        }
+        else
+        {
+            <h1>Мои заявки</h1>
+        }
+
+    <div class="row">
+
+
+        @if (ViewBag.orders == null || ViewBag.orders.Count < 1)
+        {
+            <p>
+                Заявок нет.
+            </p>
+            <!-- Клиент -->
+            if (ViewBag.USER.User_Law_Id != 1)
+            {
+                <p>
+                    Воспользуйтесь @Html.ActionLink("каталогом", "Catalog", "Home"), чтобы выбрать компьютерную технику и добавить её в корзину для
+                    последующего оформления заказа
+                </p>
+                }
+
+            }
+            else
+            {
+
+
+
+                <table border="1">
+
+                    <!-- Шапка таблицы -->
+                    <tr>
+                        <th>Дата заявки</th>
+
+                        <!-- Администрирование -->
+                        @if (ViewBag.USER.User_Law_Id == 1)
+                        {
+                            <th>Клиент</th>
+                        }
+
+                        <th>Оплачено</th>
+                        <th>Статус заявки</th>
+                        <th>Способ оплаты</th>
+                        <th>Дата исполнения</th>
+                        <th></th>
+                    </tr>
+
+                    <!-- Данные таблицы -->
+
+                    @foreach (var item in ViewBag.orders)
+                    {
+                        <tr>
+
+                            <!-- Администрирование -->
+                            @if (ViewBag.USER.User_Law_Id == 1)
+                            {
+                                <td>@item.Users.User_fio</td>
+                            }
+
+
+
+
+
+
+                            <td>@item.Order_date.ToString()</td>
+
+                            @if (item.Order_paid == 1)
+                            {
+                                <td>оплачено</td>
+                            }
+                            else
+                            {
+                                <td>не оплачено</td>
+                            }
+
+                            <td>@item.States.State_name</td>
+                            <td>@item.Ways.Ways_name</td>
+                            @if (item.Order_delivery != null)
+                            {
+                                <td>@item.Order_delivery.ToString()</td>
+                            }
+                            else
+                            {
+                                <td>ожидается</td>
+                            }
+
+                            <td>
+                                <form method="post" action="/Home/PageRecords">
+                                    <input type="hidden" name="Id" value="@item.Id" />
+                                    <!-- <input type="submit" name="record" value="Состав заявки" />  -->
+                                </form>
+
+                                @if (item.States.Id == 1 && ViewBag.USER.User_Law_Id != 1)
+                                {
+                                    <form method="post">
+                                        <input type="hidden" name="Id" value="@item.Id" />
+                                        <input type="submit" name="delete" value="Отменить заявку" />
+                                        <input type="submit" name="ret" value="Вернуть в корзину" />
+                                    </form>
+                                }
+
+                                <!-- Администрирование -->
+                                @if (ViewBag.USER.User_Law_Id == 1)
+                                {
+                                    <form method="post" action="/Home/EditOrder">
+                                        <input type="hidden" name="Id" value="@item.Id" />
+                                        <input type="submit" name="edit" value="Изменить" />
+                                    </form>
+                                }
+
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            }
+
+        </div>
+
+    </div>

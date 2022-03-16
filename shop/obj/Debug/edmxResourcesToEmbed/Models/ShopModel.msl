@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище bazaModelContainer" CdmEntityContainer="bazaEntities">
+    <EntitySetMapping Name="Brands">
+      <EntityTypeMapping TypeName="bazaModel.Brands">
+        <MappingFragment StoreEntitySet="Brands">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Brand_name" ColumnName="Brand_name" />
+          <ScalarProperty Name="Mark_del" ColumnName="Mark_del" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="bazaModel.Categories">
+        <MappingFragment StoreEntitySet="Categories">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Category_name" ColumnName="Category_name" />
+          <ScalarProperty Name="Mark_del" ColumnName="Mark_del" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Countries">
+      <EntityTypeMapping TypeName="bazaModel.Countries">
+        <MappingFragment StoreEntitySet="Countries">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Country_name" ColumnName="Country_name" />
+          <ScalarProperty Name="Mark_del" ColumnName="Mark_del" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Laws">
+      <EntityTypeMapping TypeName="bazaModel.Laws">
+        <MappingFragment StoreEntitySet="Laws">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Law_name" ColumnName="Law_name" />
+          <ScalarProperty Name="Mark_del" ColumnName="Mark_del" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Methods">
+      <EntityTypeMapping TypeName="bazaModel.Methods">
+        <MappingFragment StoreEntitySet="Methods">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Method_name" ColumnName="Method_name" />
+          <ScalarProperty Name="Mark_del" ColumnName="Mark_del" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="bazaModel.Orders">
+        <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Order_User_Id" ColumnName="Order_User_Id" />
+          <ScalarProperty Name="Order_Way_Id" ColumnName="Order_Way_Id" />
+          <ScalarProperty Name="Order_State_Id" ColumnName="Order_State_Id" />
+          <ScalarProperty Name="Order_Method_Id" ColumnName="Order_Method_Id" />
+          <ScalarProperty Name="Order_date" ColumnName="Order_date" />
+          <ScalarProperty Name="Order_delivery" ColumnName="Order_delivery" />
+          <ScalarProperty Name="Order_paid" ColumnName="Order_paid" />
+          <ScalarProperty Name="Mark_del" ColumnName="Mark_del" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Records">
+      <EntityTypeMapping TypeName="bazaModel.Records">
+        <MappingFragment StoreEntitySet="Records">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Record_Technic_Id" ColumnName="Record_Technic_Id" />
+          <ScalarProperty Name="Record_Order_Id" ColumnName="Record_Order_Id" />
+          <ScalarProperty Name="Record_count" ColumnName="Record_count" />
+          <ScalarProperty Name="Mark_del" ColumnName="Mark_del" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="States">
+      <EntityTypeMapping TypeName="bazaModel.States">
+        <MappingFragment StoreEntitySet="States">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="State_name" ColumnName="State_name" />
+          <ScalarProperty Name="Mark_del" ColumnName="Mark_del" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Technics">
+      <EntityTypeMapping TypeName="bazaModel.Technics">
+        <MappingFragment StoreEntitySet="Technics">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Technic_Country_Id" ColumnName="Technic_Country_Id" />
+          <ScalarProperty Name="Technic_Category_Id" ColumnName="Technic_Category_Id" />
+          <ScalarProperty Name="Technic_Brand_Id" ColumnName="Technic_Brand_Id" />
+          <ScalarProperty Name="Technic_name" ColumnName="Technic_name" />
+          <ScalarProperty Name="Technic_model" ColumnName="Technic_model" />
+          <ScalarProperty Name="Technic_param" ColumnName="Technic_param" />
+          <ScalarProperty Name="Technic_year" ColumnName="Technic_year" />
+          <ScalarProperty Name="Technic_cost" ColumnName="Technic_cost" />
+          <ScalarProperty Name="Technic_availability" ColumnName="Technic_availability" />
+          <ScalarProperty Name="Mark_del" ColumnName="Mark_del" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="bazaModel.Users">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="User_Law_Id" ColumnName="User_Law_Id" />
+          <ScalarProperty Name="User_fio" ColumnName="User_fio" />
+          <ScalarProperty Name="User_address" ColumnName="User_address" />
+          <ScalarProperty Name="User_pasport" ColumnName="User_pasport" />
+          <ScalarProperty Name="User_email" ColumnName="User_email" />
+          <ScalarProperty Name="User_tel" ColumnName="User_tel" />
+          <ScalarProperty Name="User_log" ColumnName="User_log" />
+          <ScalarProperty Name="User_pas" ColumnName="User_pas" />
+          <ScalarProperty Name="Mark_del" ColumnName="Mark_del" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ways">
+      <EntityTypeMapping TypeName="bazaModel.Ways">
+        <MappingFragment StoreEntitySet="Ways">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Ways_name" ColumnName="Ways_name" />
+          <ScalarProperty Name="Mark_del" ColumnName="Mark_del" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

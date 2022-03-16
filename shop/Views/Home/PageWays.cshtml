@@ -1,0 +1,107 @@
+﻿@{
+    ViewBag.Title = "Каталог способов оплаты";
+
+}
+
+
+
+
+
+
+<div class="jumbotron">
+    <h1>Справочник способов оплаты</h1>
+
+
+    <div class="row">
+
+        <!-- ================== Колонка фильтра ================== -->
+        <!-- ===================================================== -->
+        <div class="col-md-3">
+
+            <form method="post">
+
+                <!-- Поле поиска по названию -->
+
+                <label>Название:</label><br />
+
+                <input type="text" name="Way_name" value="@ViewBag.Way_name" /><br />
+
+                <!-- Кнопка отбора -->
+
+                <br />
+                <input class="btn btn-primary btn-lg" type="submit" name="select" value="Отобрать" />
+            </form>
+
+
+
+            <!-- Кнопка Добавление (Администратор) -->
+
+            @if (ViewBag.USER != null && ViewBag.USER.User_Law_Id == 1)
+            {
+                <br />
+                <form method="post" action="/Home/EditWay">
+                    <input class="btn btn-primary btn-lg" type="submit" name="add" value="Добавить" />
+                </form>
+            }
+
+        </div>
+
+
+
+        <!-- ================== Колонка данных =================== -->
+        <!-- ===================================================== -->
+
+        <div class="col-md-1">
+
+
+            <!-- Список способов оплаты -->
+
+            <table border="1">
+
+
+                <!-- Шапка таблицы -->
+                <tr>
+                    <th>Способ оплаты</th>
+
+                    <!-- Колонка (Администратор) -->
+                    @if (ViewBag.USER != null && ViewBag.USER.User_Law_Id == 1)
+                    {
+                        <th>Управление</th>
+                    }
+
+                </tr>
+
+
+
+
+                <!-- Данные таблицы -->
+
+                @foreach (var item in ViewBag.Ways)
+                {
+                    <tr>
+
+                        <td>@item.Ways_name.ToString()</td>
+
+                        <!-- Кнопка Изменение (Администратор) -->
+                        @if (ViewBag.USER != null && ViewBag.USER.User_Law_Id == 1)
+                        {
+                            <td>
+                                <form method="post" action="/Home/EditWay">
+                                    <input type="hidden" name="Id" value="@item.Id" />
+                                    <input class="btn btn-primary btn-lg" type="submit" name="edit" value="Изменить" />
+                                </form>
+                            </td>
+                        }
+
+                    </tr>
+                }
+
+            </table>
+
+            <!-- ===================================================== -->
+
+
+        </div>
+    </div>
+
+</div>

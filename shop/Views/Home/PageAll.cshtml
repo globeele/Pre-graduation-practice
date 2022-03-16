@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "Справочная информация";
+}
+
+
+
+
+
+
+@if (ViewBag.USER.User_Law_Id == 1)
+{
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Пользователи</h2>
+            <p>
+                Оперативно-справочная информация о зарегистрированных пользователях с указанием их прав.
+            </p>
+            <p><a class="btn btn-default" href="/Home/PageUsers">Пользователи &raquo;</a></p>
+        </div>
+
+        <div class="col-md-4">
+            <h2>Права и должности пользователей</h2>
+            <p>
+                Справочная информация со списком прав и должностей пользователей автоматизированной системы.
+            </p>
+            <p><a class="btn btn-default" href="/Home/PageLaws">Права и должности &raquo;</a></p>
+        </div>
+
+    </div>
+
+    <br />
+
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Статусы заявок</h2>
+            <p>
+                Список статусов выполнения заявок.
+            </p>
+            <p><a class="btn btn-default" href="/Home/PageStates">Статусы &raquo;</a></p>
+        </div>
+
+        <div class="col-md-4">
+            <h2>Категории заявок</h2>
+            <p>
+                Список категорий заявок (разработка, доработка, веб-сайт, in-консалтинг ...).
+            </p>
+            <p><a class="btn btn-default" href="/Home/PageCategories">Категории &raquo;</a></p>
+        </div>
+
+        <div class="col-md-4">
+            
+        </div>
+    </div>
+
+    <br />
+}
+
+
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Способы оплаты</h2>
+        <p>
+            Справочная информация о возможных способах оплаты выбранные решения.
+        </p>
+        <p><a class="btn btn-default" href="/Home/PageWays">Способы оплаты &raquo;</a></p>
+    </div>
+
+    <div class="col-md-4">
+        <h2>Типы доработок</h2>
+        <p>
+            Cправочная информация о возможных типах доработок ПО.
+        </p>
+        <p><a class="btn btn-default" href="/Home/PageMethods">Типы доработок &raquo;</a></p>
+    </div>
+
+    <div class="col-md-4">
+        <h2>Операционные системы</h2>
+        <p>
+            Справочная информация об операционных системах.
+        </p>
+        <p><a class="btn btn-default" href="/Home/PageBrands">ОС &raquo;</a></p>
+    </div>
+</div>

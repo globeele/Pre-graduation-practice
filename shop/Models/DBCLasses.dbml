@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="baza" Class="DBCLassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\baza.mdf;Integrated Security=True;MultipleActiveResultSets=True;Connect Timeout=30;Application Name=EntityFramework" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="bazaConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Brands" Member="Brands">
+    <Type Name="Brands">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Brand_name" Type="System.String" DbType="NChar(18) NOT NULL" CanBeNull="false" />
+      <Column Name="Mark_del" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Brands_Technics" Member="Technics" ThisKey="Id" OtherKey="Technic_Brand_Id" Type="Technics" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Ways" Member="Ways">
+    <Type Name="Ways">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Ways_name" Type="System.String" DbType="NChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Mark_del" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Ways_Orders" Member="Orders" ThisKey="Id" OtherKey="Order_Way_Id" Type="Orders" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Categories" Member="Categories">
+    <Type Name="Categories">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Category_name" Type="System.String" DbType="NChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="Mark_del" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Categories_Technics" Member="Technics" ThisKey="Id" OtherKey="Technic_Category_Id" Type="Technics" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Countries" Member="Countries">
+    <Type Name="Countries">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Country_name" Type="System.String" DbType="NChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="Mark_del" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Countries_Technics" Member="Technics" ThisKey="Id" OtherKey="Technic_Country_Id" Type="Technics" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Laws" Member="Laws">
+    <Type Name="Laws">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Law_name" Type="System.String" DbType="NChar(38) NOT NULL" CanBeNull="false" />
+      <Column Name="Mark_del" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Laws_Users" Member="Users" ThisKey="Id" OtherKey="User_Law_Id" Type="Users" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Methods" Member="Methods">
+    <Type Name="Methods">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Method_name" Type="System.String" DbType="NChar(18) NOT NULL" CanBeNull="false" />
+      <Column Name="Mark_del" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Orders" Member="Orders">
+    <Type Name="Orders">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Order_User_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Order_Way_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Order_State_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Order_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Order_delivery" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Order_paid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Mark_del" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Order_cat" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Orders_Records" Member="Records" ThisKey="Id" OtherKey="Record_Order_Id" Type="Records" />
+      <Association Name="Ways_Orders" Member="Ways" ThisKey="Order_Way_Id" OtherKey="Id" Type="Ways" IsForeignKey="true" />
+      <Association Name="States_Orders" Member="States" ThisKey="Order_State_Id" OtherKey="Id" Type="States" IsForeignKey="true" />
+      <Association Name="Users_Orders" Member="Users" ThisKey="Order_User_Id" OtherKey="Id" Type="Users" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Records" Member="Records">
+    <Type Name="Records">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Record_Order_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Record_count" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Mark_del" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Domen" Type="System.String" DbType="NChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Hoster" Type="System.String" DbType="NChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Caption" Type="System.String" DbType="NChar(200) NOT NULL" CanBeNull="false" />
+      <Association Name="Orders_Records" Member="Orders" ThisKey="Record_Order_Id" OtherKey="Id" Type="Orders" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.States" Member="States">
+    <Type Name="States">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="State_name" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Mark_del" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="States_Orders" Member="Orders" ThisKey="Id" OtherKey="Order_State_Id" Type="Orders" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Technics" Member="Technics">
+    <Type Name="Technics">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Technic_Country_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Technic_Category_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Technic_Brand_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Technic_name" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Technic_model" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Technic_param" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+      <Column Name="Technic_year" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Technic_cost" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Technic_availability" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Mark_del" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Brands_Technics" Member="Brands" ThisKey="Technic_Brand_Id" OtherKey="Id" Type="Brands" IsForeignKey="true" />
+      <Association Name="Categories_Technics" Member="Categories" ThisKey="Technic_Category_Id" OtherKey="Id" Type="Categories" IsForeignKey="true" />
+      <Association Name="Countries_Technics" Member="Countries" ThisKey="Technic_Country_Id" OtherKey="Id" Type="Countries" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="Users">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="User_Law_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="User_fio" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="User_address" Type="System.String" DbType="NChar(70) NOT NULL" CanBeNull="false" />
+      <Column Name="User_pasport" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="User_email" Type="System.String" DbType="NChar(30)" CanBeNull="true" />
+      <Column Name="User_tel" Type="System.String" DbType="NChar(13) NOT NULL" CanBeNull="false" />
+      <Column Name="User_log" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="User_pas" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Mark_del" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Users_Orders" Member="Orders" ThisKey="Id" OtherKey="Order_User_Id" Type="Orders" />
+      <Association Name="Laws_Users" Member="Laws" ThisKey="User_Law_Id" OtherKey="Id" Type="Laws" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

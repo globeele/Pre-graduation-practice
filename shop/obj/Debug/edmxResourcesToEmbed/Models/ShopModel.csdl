@@ -1,0 +1,307 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="bazaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Brands">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Brand_name" Type="String" MaxLength="18" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Mark_del" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Technics" Relationship="bazaModel.FK_Technics_To_Brands" FromRole="Brands" ToRole="Technics" />
+  </EntityType>
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Category_name" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Mark_del" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Technics" Relationship="bazaModel.FK_Technics_To_Categories" FromRole="Categories" ToRole="Technics" />
+  </EntityType>
+  <EntityType Name="Countries">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Country_name" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Mark_del" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Technics" Relationship="bazaModel.FK_Technics_To_Countries" FromRole="Countries" ToRole="Technics" />
+  </EntityType>
+  <EntityType Name="Laws">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Law_name" Type="String" MaxLength="18" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Mark_del" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Users" Relationship="bazaModel.FK_Users_To_Laws" FromRole="Laws" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Methods">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Method_name" Type="String" MaxLength="18" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Mark_del" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Orders" Relationship="bazaModel.FK_Orders_To_Methods" FromRole="Methods" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Order_User_Id" Type="Int32" Nullable="false" />
+    <Property Name="Order_Way_Id" Type="Int32" Nullable="false" />
+    <Property Name="Order_State_Id" Type="Int32" Nullable="false" />
+    <Property Name="Order_Method_Id" Type="Int32" Nullable="false" />
+    <Property Name="Order_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Order_delivery" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Order_paid" Type="Int32" Nullable="false" />
+    <Property Name="Mark_del" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Methods" Relationship="bazaModel.FK_Orders_To_Methods" FromRole="Orders" ToRole="Methods" />
+    <NavigationProperty Name="States" Relationship="bazaModel.FK_Orders_To_States" FromRole="Orders" ToRole="States" />
+    <NavigationProperty Name="Users" Relationship="bazaModel.FK_Orders_To_Users" FromRole="Orders" ToRole="Users" />
+    <NavigationProperty Name="Ways" Relationship="bazaModel.FK_Orders_To_Ways" FromRole="Orders" ToRole="Ways" />
+    <NavigationProperty Name="Records" Relationship="bazaModel.FK_Records_To_Orders" FromRole="Orders" ToRole="Records" />
+  </EntityType>
+  <EntityType Name="Records">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Record_Technic_Id" Type="Int32" Nullable="false" />
+    <Property Name="Record_Order_Id" Type="Int32" Nullable="false" />
+    <Property Name="Record_count" Type="Int32" Nullable="false" />
+    <Property Name="Mark_del" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Orders" Relationship="bazaModel.FK_Records_To_Orders" FromRole="Records" ToRole="Orders" />
+    <NavigationProperty Name="Technics" Relationship="bazaModel.FK_Records_To_Technics" FromRole="Records" ToRole="Technics" />
+  </EntityType>
+  <EntityType Name="States">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="State_name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Mark_del" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Orders" Relationship="bazaModel.FK_Orders_To_States" FromRole="States" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="Technics">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Technic_Country_Id" Type="Int32" Nullable="false" />
+    <Property Name="Technic_Category_Id" Type="Int32" Nullable="false" />
+    <Property Name="Technic_Brand_Id" Type="Int32" Nullable="false" />
+    <Property Name="Technic_name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Technic_model" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Technic_param" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="Technic_year" Type="Int32" Nullable="false" />
+    <Property Name="Technic_cost" Type="Double" Nullable="false" />
+    <Property Name="Technic_availability" Type="Int32" Nullable="false" />
+    <Property Name="Mark_del" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Countries" Relationship="bazaModel.FK_Technics_To_Countries" FromRole="Technics" ToRole="Countries" />
+    <NavigationProperty Name="Brands" Relationship="bazaModel.FK_Technics_To_Brands" FromRole="Technics" ToRole="Brands" />
+    <NavigationProperty Name="Categories" Relationship="bazaModel.FK_Technics_To_Categories" FromRole="Technics" ToRole="Categories" />
+    <NavigationProperty Name="Records" Relationship="bazaModel.FK_Records_To_Technics" FromRole="Technics" ToRole="Records" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="User_Law_Id" Type="Int32" Nullable="false" />
+    <Property Name="User_fio" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="User_address" Type="String" MaxLength="70" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="User_pasport" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="User_email" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+    <Property Name="User_tel" Type="String" MaxLength="13" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="User_log" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="User_pas" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Mark_del" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Laws" Relationship="bazaModel.FK_Users_To_Laws" FromRole="Users" ToRole="Laws" />
+    <NavigationProperty Name="Orders" Relationship="bazaModel.FK_Orders_To_Users" FromRole="Users" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="Ways">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ways_name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Mark_del" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Orders" Relationship="bazaModel.FK_Orders_To_Ways" FromRole="Ways" ToRole="Orders" />
+  </EntityType>
+  <EntityContainer Name="bazaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Brands" EntityType="Self.Brands" />
+    <EntitySet Name="Categories" EntityType="Self.Categories" />
+    <EntitySet Name="Countries" EntityType="Self.Countries" />
+    <EntitySet Name="Laws" EntityType="Self.Laws" />
+    <EntitySet Name="Methods" EntityType="Self.Methods" />
+    <EntitySet Name="Orders" EntityType="Self.Orders" />
+    <EntitySet Name="Records" EntityType="Self.Records" />
+    <EntitySet Name="States" EntityType="Self.States" />
+    <EntitySet Name="Technics" EntityType="Self.Technics" />
+    <EntitySet Name="Users" EntityType="Self.Users" />
+    <EntitySet Name="Ways" EntityType="Self.Ways" />
+    <AssociationSet Name="FK_Technics_To_Countries" Association="bazaModel.FK_Technics_To_Countries">
+      <End Role="Countries" EntitySet="Countries" />
+      <End Role="Technics" EntitySet="Technics" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Technics_To_Brands" Association="bazaModel.FK_Technics_To_Brands">
+      <End Role="Brands" EntitySet="Brands" />
+      <End Role="Technics" EntitySet="Technics" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Technics_To_Categories" Association="bazaModel.FK_Technics_To_Categories">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Technics" EntitySet="Technics" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_To_Laws" Association="bazaModel.FK_Users_To_Laws">
+      <End Role="Laws" EntitySet="Laws" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_To_Methods" Association="bazaModel.FK_Orders_To_Methods">
+      <End Role="Methods" EntitySet="Methods" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_To_States" Association="bazaModel.FK_Orders_To_States">
+      <End Role="States" EntitySet="States" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_To_Users" Association="bazaModel.FK_Orders_To_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_To_Ways" Association="bazaModel.FK_Orders_To_Ways">
+      <End Role="Ways" EntitySet="Ways" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Records_To_Orders" Association="bazaModel.FK_Records_To_Orders">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="Records" EntitySet="Records" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Records_To_Technics" Association="bazaModel.FK_Records_To_Technics">
+      <End Role="Technics" EntitySet="Technics" />
+      <End Role="Records" EntitySet="Records" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="FK_Technics_To_Countries">
+    <End Type="bazaModel.Countries" Role="Countries" Multiplicity="1" />
+    <End Type="bazaModel.Technics" Role="Technics" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Countries">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Technics">
+        <PropertyRef Name="Technic_Country_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Technics_To_Brands">
+    <End Type="bazaModel.Brands" Role="Brands" Multiplicity="1" />
+    <End Type="bazaModel.Technics" Role="Technics" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Brands">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Technics">
+        <PropertyRef Name="Technic_Brand_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Technics_To_Categories">
+    <End Type="bazaModel.Categories" Role="Categories" Multiplicity="1" />
+    <End Type="bazaModel.Technics" Role="Technics" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Technics">
+        <PropertyRef Name="Technic_Category_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_To_Laws">
+    <End Type="bazaModel.Laws" Role="Laws" Multiplicity="1" />
+    <End Type="bazaModel.Users" Role="Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Laws">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="User_Law_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_To_Methods">
+    <End Type="bazaModel.Methods" Role="Methods" Multiplicity="1" />
+    <End Type="bazaModel.Orders" Role="Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Methods">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="Order_Method_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_To_States">
+    <End Type="bazaModel.States" Role="States" Multiplicity="1" />
+    <End Type="bazaModel.Orders" Role="Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="States">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="Order_State_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_To_Users">
+    <End Type="bazaModel.Users" Role="Users" Multiplicity="1" />
+    <End Type="bazaModel.Orders" Role="Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="Order_User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_To_Ways">
+    <End Type="bazaModel.Ways" Role="Ways" Multiplicity="1" />
+    <End Type="bazaModel.Orders" Role="Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ways">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="Order_Way_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Records_To_Orders">
+    <End Type="bazaModel.Orders" Role="Orders" Multiplicity="1" />
+    <End Type="bazaModel.Records" Role="Records" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Records">
+        <PropertyRef Name="Record_Order_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Records_To_Technics">
+    <End Type="bazaModel.Technics" Role="Technics" Multiplicity="1" />
+    <End Type="bazaModel.Records" Role="Records" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Technics">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Records">
+        <PropertyRef Name="Record_Technic_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

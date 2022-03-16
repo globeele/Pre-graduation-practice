@@ -1,0 +1,236 @@
+﻿@{
+    ViewBag.Title = "Редактирование компьютерной техники";
+}
+
+
+
+<div class="jumbotron">
+    <h1>@ViewBag.Caption компьютерную технику</h1>
+
+    <i><font color="red">@ViewBag.Message</font></i><br />
+
+
+                                                    <form method="post" action="">
+
+                                                        <input type="hidden" name="Id" value="@ViewBag.Technic.Id" />
+
+
+
+
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label>Название</label><sup><font color="red">*</font></sup><br />
+                                                                <input type="text" name="Technic_name" value="@ViewBag.Technic.Technic_name" />
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <label>Модель</label><sup><font color="red">*</font></sup><br />
+                                                                <input type="text" name="Technic_model" value="@ViewBag.Technic.Technic_model" />
+                                                            </div>
+
+                                                        </div>
+
+
+
+                                                        <br />
+
+
+
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label>Параметры</label><br />
+                                                                <input type="text" name="Technic_param" value="@ViewBag.Technic.Technic_param" />
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <label>Стоимость</label><sup><font color="red">*</font></sup><br />
+                                                                <input type="text" name="Technic_cost" value="@ViewBag.Technic.Technic_cost" />
+                                                            </div>
+
+                                                        </div>
+
+
+                                                        <br />
+
+
+                                                        <!-- Доступность на складе -->
+                                                        @if (ViewBag.Mode == "update")
+                                                        {
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <b>Наличие на складе</b><sup><font color="red">*</font></sup><br />
+
+                                                                    <select name="Technic_availability">
+
+                                                                       
+
+                                                                        @if (ViewBag.Technic.Technic_availability == 0)
+                                                                        {
+                                                                            <option value="0" selected>Нет в наличии</option>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <option value="0">Нет в наличии</option>
+                                                                        }
+
+                                                                        @if (ViewBag.Technic.Technic_availability == 1)
+                                                                        {
+                                                                            <option value="1" selected>Есть в наличии</option>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <option value="1">Есть в наличии</option>
+                                                                        }
+                                                                    </select><br />
+
+                                                                </div>
+
+                                                                <div class="col-md-4">
+                                                                </div>
+
+                                                            </div>
+
+                                                            <br />
+                                                        }
+
+
+
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+
+                                                                <!-- Выпадающий список КАТЕГОРИЙ компьютерной техники -->
+
+                                                                <label>Категория</label><sup><font color="red">*</font></sup><br />
+
+                                                                <select name="Category_Id">
+
+                                                                    <option value="0">Выберите категорию</option>
+
+                                                                    @foreach (var item in ViewBag.Categories)
+                                                                    {
+                                                                        if (item.Id == ViewBag.Technic.Technic_Category_Id)
+                                                                        {
+                                                                            <option value="@item.Id.ToString()" selected>@item.Category_name.ToString()</option>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <option value="@item.Id.ToString()">@item.Category_name.ToString()</option>
+                                                                        }
+                                                                    }
+                                                                </select>
+
+                                                            </div>
+
+
+                                                            <br />
+
+                                                            <div class="col-md-4">
+
+                                                                <!-- Выпадающий список ГОДОВ выпуска компьютерной техники -->
+
+                                                                <label>Год выпуска</label><sup><font color="red">*</font></sup><br />
+
+                                                                <select name="Technic_year">
+
+                                                                    <option value="0">Выберите год</option>
+
+                                                                    @for (int i = 2020; i >= 1980; i--)
+                                                                    {
+                                                                        if (i == ViewBag.Technic.Technic_year)
+                                                                        {
+                                                                            <option value="@i.ToString()" selected>@i.ToString()</option>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <option value="@i.ToString()">@i.ToString()</option>
+                                                                        }
+                                                                    }
+                                                                </select><br />
+
+                                                                <!-- Кнопка отбора -->
+                                                            </div>
+
+                                                        </div>
+
+
+                                                        <br />
+
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+
+                                                                <!-- Выпадающий список БРЕНДОВ компьютерной техники -->
+
+                                                                <label>Бренд</label><sup><font color="red">*</font></sup><br />
+
+                                                                <select name="Brand_Id">
+
+                                                                    <option value="0">Выберите бренд</option>
+
+                                                                    @foreach (var item in ViewBag.Brands)
+                                                                    {
+                                                                        if (item.Id == ViewBag.Technic.Technic_Brand_Id)
+                                                                        {
+                                                                            <option value="@item.Id.ToString()" selected>@item.Brand_name.ToString()</option>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <option value="@item.Id.ToString()">@item.Brand_name.ToString()</option>
+                                                                        }
+                                                                    }
+                                                                </select>
+
+                                                            </div>
+
+
+
+
+                                                            <div class="col-md-4">
+
+                                                                <!-- Выпадающий список СТРАН компьютерной техники -->
+
+                                                                <label>Страна</label><sup><font color="red">*</font></sup><br />
+
+                                                                <select name="Country_Id">
+
+                                                                    <option value="0">Выберите страну</option>
+
+                                                                    @foreach (var item in ViewBag.Countries)
+                                                                    {
+                                                                        if (item.Id == ViewBag.Technic.Technic_Country_Id)
+                                                                        {
+                                                                            <option value="@item.Id.ToString()" selected>@item.Country_name.ToString()</option>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <option value="@item.Id.ToString()">@item.Country_name.ToString()</option>
+                                                                        }
+                                                                    }
+                                                                </select><br />
+
+                                                            </div>
+
+
+
+
+                                                            <br />
+
+                                                            <!-- Кнопка примерить (Добавить/Изменить) -->
+                                                            <input class="btn btn-primary btn-lg" type="submit" name="@ViewBag.Mode" value="@ViewBag.Caption" />
+
+
+                                                            <!-- Кнопка удаления -->
+                                                            @if (ViewBag.USER != null && ViewBag.USER.User_Law_Id == 1 && ViewBag.Mode == "update")
+                                                            {
+                                                                <input class="btn btn-primary btn-lg" type="submit" name="delete" value="Удалить" />
+                                                            }
+
+                                                            <!-- Кнопка отмены -->
+                                                            @if (ViewBag.USER != null && ViewBag.USER.User_Law_Id == 1)
+                                                            {
+                                                                <input class="btn btn-primary btn-lg" type="submit" name="cancel" value="Отменить" />
+                                                            }
+
+                                                        </div>
+                                                    </form>
+
+</div>

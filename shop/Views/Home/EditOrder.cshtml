@@ -1,0 +1,117 @@
+﻿@{
+    ViewBag.Title = "Редактирование заявок";
+}
+
+
+
+<div class="jumbotron">
+    <h1>Редактирование заявки</h1>
+
+    <i><font color="red">@ViewBag.Message</font></i><br />
+
+
+    <form method="post" action="">
+
+        <input type="hidden" name="Id" value="@ViewBag.Order.Id" />
+
+        <div class="row">
+            <div class="col-md-4">
+                <label>Срок выполнения</label><sup><font color="red">*</font></sup><br />
+                <input type="text" name="Order_delivery" value="@ViewBag.Order.Order_delivery" />
+            </div>
+
+            <select name="Order_paid">
+
+                @if (ViewBag.Order.Order_paid == 0)
+                {
+                    <option value="0" selected>Не оплачено</option>
+                }
+                else
+                {
+                    <option value="0">Не оплачено</option>
+                }
+
+                @if (ViewBag.Order.Order_paid == 1)
+                {
+                    <option value="1" selected>Оплачено</option>
+                }
+                else
+                {
+                    <option value="1">Оплачено</option>
+                }
+            </select><br />
+
+        </div>
+
+
+
+        <br />
+
+
+
+
+
+
+
+
+
+        <div class="row">
+            <div class="col-md-4">
+
+                <!-- Выпадающий список СТАТУСОВ заказа -->
+
+                <label>Статус заявки</label><sup><font color="red">*</font></sup><br />
+
+                <select name="State_Id">
+
+                    <option value="0">Выберите статус</option>
+
+                    @foreach (var item in ViewBag.States)
+                    {
+                        if (item.Id == ViewBag.Order.Order_State_Id)
+                        {
+                            <option value="@item.Id.ToString()" selected>@item.State_name.ToString()</option>
+                        }
+                        else
+                        {
+                            <option value="@item.Id.ToString()">@item.State_name.ToString()</option>
+                        }
+                    }
+                </select>
+
+            </div>
+
+
+
+
+            <div class="col-md-4">
+
+
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+
+        <br />
+        <div class="row">
+
+            <!-- Кнопка примерить (Добавить/Изменить) -->
+            <input class="btn btn-primary btn-lg" type="submit" name="@ViewBag.Mode" value="@ViewBag.Caption" />
+
+
+            <!-- Кнопка отмены -->
+            @if (ViewBag.USER != null && ViewBag.USER.User_Law_Id == 1)
+            {
+                <input class="btn btn-primary btn-lg" type="submit" name="cancel" value="Отменить" />
+            }
+
+        </div>
+    </form>
+
+</div>
